@@ -5,4 +5,4 @@ It's a simple user authentication app that uses Reterofit to make HTTP requests 
 
 
 ## To-Do
--Add RxJava.
+- Add RxJava.
