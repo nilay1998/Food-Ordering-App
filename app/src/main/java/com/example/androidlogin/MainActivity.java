@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.androidlogin.Retrofit.NetworkClient;
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         register_view=getLayoutInflater().inflate(R.layout.register,null);
         setContentView(login_view);
 
+        final ProgressBar progressBar=(ProgressBar)findViewById(R.id.loading_spinner);
+        progressBar.setVisibility(View.GONE);
+
         //Obtain an instance of Retrofit by calling the static method.
         Retrofit retrofit = NetworkClient.getRetrofitClient();
 
@@ -59,17 +63,20 @@ public class MainActivity extends AppCompatActivity {
         button_login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Do something in response to button click
+                progressBar.setVisibility(View.VISIBLE);
                 Call call=requestService.loginUser(edittext_email.getText().toString(),edittext_password.getText().toString());
                 //Call call=requestService.loginUser("nilaygupta1998@gmail.com","nilay");
                 call.enqueue(new Callback() {
                     @Override
                     public void onResponse(Call call, Response response) {
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(MainActivity.this,""+response.body().toString(),Toast.LENGTH_SHORT).show();
                         Log.d("Success",response.body().toString());
                     }
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(MainActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
                         Log.e("Error",t.getMessage());
                     }
@@ -95,15 +102,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         setContentView(login_view);
+                        progressBar.setVisibility(View.VISIBLE);
                         Call call=requestService.createUser(edittext_name.getText().toString(),edittext_email.getText().toString(),edittext_password.getText().toString(),edittext_phone.getText().toString());
                         call.enqueue(new Callback() {
                             @Override
                             public void onResponse(Call call, Response response) {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(MainActivity.this,""+response.body().toString(),Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
                             public void onFailure(Call call, Throwable t) {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(MainActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
                             }
                         });
