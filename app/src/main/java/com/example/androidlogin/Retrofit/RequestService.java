@@ -14,13 +14,13 @@ public interface RequestService
 
     @POST("register")
     @FormUrlEncoded
-    Call<String> createUser(@Field("name") String name,
+    Call<Profile> createUser(@Field("name") String name,
                             @Field("email") String email,
                             @Field("password") String password,
                             @Field("phone") String phone );
 
     @POST("login")
     @FormUrlEncoded
-    Call<String> loginUser(@Field("email") String email,
+    Call<Profile> loginUser(@Field("email") String email,
                            @Field("password") String password);
 }
