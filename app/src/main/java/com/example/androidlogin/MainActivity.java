@@ -1,7 +1,10 @@
 package com.example.androidlogin;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.se.omapi.Session;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,7 +53,30 @@ public class MainActivity extends AppCompatActivity {
         register_view=getLayoutInflater().inflate(R.layout.register,null);
         setContentView(login_view);
         final Intent intent = new Intent(this, CustomerActivity.class);
+        final Sessions session=new Sessions(getApplicationContext());
+        if(session.isLoggedIn())
+        {
+            intent.putExtra("name",session.pref.getString("name","FUCK"));
+            intent.putExtra("email",session.pref.getString("email","FUCK"));
+            intent.putExtra("phone",session.pref.getLong("phone",00000));
+            startActivity(intent);
+        }
 
+
+
+
+
+
+
+        //sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        //Log.e("check MAIN ACTIVITY",""+sharedpreferences.getBoolean(isLoggedIn,false));
+//        if(sharedpreferences.getBoolean(isLoggedIn,false)==true)
+//        {
+//            intent.putExtra("name",sharedpreferences.getString("name","FUCK"));
+//            intent.putExtra("email",sharedpreferences.getString("email","FUCK"));
+//            intent.putExtra("phone",sharedpreferences.getString("phone","FUCK"));
+//            startActivity(intent);
+//        }
         final ProgressBar progressBar=(ProgressBar)findViewById(R.id.loading_spinner);
         progressBar.setVisibility(View.GONE);
 
@@ -76,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this,""+response.body().getMessage(),Toast.LENGTH_SHORT).show();
                         if(response.body().getStatus().equals("1"))
                         {
+                            session.createSession();
                             intent.putExtra("name",response.body().getName());
                             intent.putExtra("email",response.body().getEmail());
                             intent.putExtra("phone",response.body().getPhone());
