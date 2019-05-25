@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         register_view=getLayoutInflater().inflate(R.layout.register,null);
         setContentView(login_view);
         final Intent intent = new Intent(this, CustomerActivity.class);
+        final Intent intent_admin =new Intent(this,AdminActivity.class);
         final Sessions session=new Sessions(getApplicationContext());
         if(session.isLoggedIn())
         {
@@ -100,13 +101,17 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<Profile> call, Response<Profile> response) {
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(MainActivity.this,""+response.body().getMessage(),Toast.LENGTH_SHORT).show();
-                        if(response.body().getStatus().equals("1"))
+                        if(response.body().getStatus().equals("1") && response.body().isAdmin()==false)
                         {
                             session.createSession();
                             intent.putExtra("name",response.body().getName());
                             intent.putExtra("email",response.body().getEmail());
                             intent.putExtra("phone",response.body().getPhone());
                             startActivity(intent);
+                        }
+                        else if(response.body().getStatus().equals("1") && response.body().isAdmin()==true)
+                        {
+                            startActivity(intent_admin);
                         }
                     }
 
@@ -139,18 +144,16 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         setContentView(login_view);
                         progressBar.setVisibility(View.VISIBLE);
-                        Call call=requestService.createUser(edittext_name.getText().toString(),edittext_email.getText().toString(),edittext_password.getText().toString(),edittext_phone.getText().toString());
-                        call.enqueue(new Callback() {
+                        Call<Profile> call=requestService.createUser(edittext_name.getText().toString(),edittext_email.getText().toString(),edittext_password.getText().toString(),edittext_phone.getText().toString());
+                        call.enqueue(new Callback<Profile>() {
                             @Override
-                            public void onResponse(Call call, Response response) {
+                            public void onResponse(Call<Profile> call, Response<Profile> response) {
                                 progressBar.setVisibility(View.GONE);
-                                Toast.makeText(MainActivity.this,""+response.body().toString(),Toast.LENGTH_SHORT).show();
-                                Log.e("ANKDEN",""+response.code());
+                                Toast.makeText(MainActivity.this,""+response.body().getMessage(),Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
-                            public void onFailure(Call call, Throwable t) {
-                                progressBar.setVisibility(View.GONE);
+                            public void onFailure(Call<Profile> call, Throwable t) {
                                 Toast.makeText(MainActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
                             }
                         });

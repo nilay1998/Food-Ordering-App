@@ -7,6 +7,15 @@ public class Profile {
     private String email;
     private String password;
     private long phone;
+    private boolean isAdmin;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     public String getName() {
         return name;
