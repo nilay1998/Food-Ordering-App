@@ -16,15 +16,17 @@ public class CustomerActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
+
         final Sessions session=new Sessions(getApplicationContext());
         final Intent intent = new Intent(this, MainActivity.class);
         Bundle extras = getIntent().getExtras();
         final String userName;
         final String useremail;
         final long userphone;
-        TextView name=(TextView)findViewById(R.id.name);
-        TextView email=(TextView)findViewById(R.id.email);
-        TextView phone=(TextView)findViewById(R.id.phone);
+
+        TextView name = (TextView)findViewById(R.id.name);
+        TextView email = (TextView)findViewById(R.id.email);
+        TextView phone = (TextView)findViewById(R.id.phone);
 
             userName = extras.getString("name");
             useremail=extras.getString("email");
@@ -33,6 +35,11 @@ public class CustomerActivity extends AppCompatActivity {
             email.setText(useremail);
             phone.setText(String.valueOf(userphone));
 
+        session.editor.putString("name",userName);
+        session.editor.putString("email",useremail);
+        session.editor.putLong("phone",userphone);
+        session.editor.commit();
+
         //Log.e("NAME",String.valueOf(userphone));
 
         Button button=(Button)findViewById(R.id.logout);
@@ -40,9 +47,9 @@ public class CustomerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 session.killSession();
-                session.editor.putString("name",userName);
-                session.editor.putString("email",useremail);
-                session.editor.putLong("phone",userphone);
+//                session.editor.putString("name",userName);
+//                session.editor.putString("email",useremail);
+//                session.editor.putLong("phone",userphone);
                 session.editor.commit();
 
                 Log.e("name",""+session.pref.getString("name",""));

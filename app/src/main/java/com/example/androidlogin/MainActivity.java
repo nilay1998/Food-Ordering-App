@@ -63,21 +63,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-
-
-
-
-
-
-        //sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        //Log.e("check MAIN ACTIVITY",""+sharedpreferences.getBoolean(isLoggedIn,false));
-//        if(sharedpreferences.getBoolean(isLoggedIn,false)==true)
-//        {
-//            intent.putExtra("name",sharedpreferences.getString("name","FUCK"));
-//            intent.putExtra("email",sharedpreferences.getString("email","FUCK"));
-//            intent.putExtra("phone",sharedpreferences.getString("phone","FUCK"));
-//            startActivity(intent);
-//        }
         final ProgressBar progressBar=(ProgressBar)findViewById(R.id.loading_spinner);
         progressBar.setVisibility(View.GONE);
 
