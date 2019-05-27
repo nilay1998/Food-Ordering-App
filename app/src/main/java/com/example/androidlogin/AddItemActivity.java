@@ -24,8 +24,8 @@ public class AddItemActivity extends AppCompatActivity {
         final EditText itemPrice=(EditText)findViewById(R.id.itemPrice);
         Button addItem=(Button)findViewById(R.id.addButton);
 
-        mNames.add("Dahi");
-        mPrice.add(25);
+//        mNames.add("Dahi");
+//        mPrice.add(25);
 
         RecyclerView recyclerView=findViewById(R.id.recyclerView);
         final RecyclerViewAdapter adapter=new RecyclerViewAdapter(mNames,mPrice,this);

@@ -1,29 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
     xmlns:tools="http://schemas.android.com/tools">
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"/>
 
-    <TextView
-        android:textColor="#000"
-        android:gravity="center"
-        android:layout_weight="1"
-        android:id="@+id/menuitem"
-        android:layout_width="wrap_content"
-        android:layout_height="44dp"
-        tools:text="BURGER"/>
+    <LinearLayout
+        android:background="#808080"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:inputType="number"
-        android:textColor="#000"
-        android:gravity="center"
-        android:layout_weight="1"
-        android:id="@+id/itemPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="44dp"
-        tools:text="BURGER"/>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"
+            android:background="#c0c0c0"/>
+
+        <TextView
+            android:textColor="#000"
+            android:gravity="center"
+            android:layout_weight="3"
+            android:id="@+id/menuitem"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            tools:text="BURGER"/>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"
+            android:background="#c0c0c0"/>
+
+        <TextView
+            android:inputType="number"
+            android:textColor="#000"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/itemPrice"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            tools:text="BURGER"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"
+            android:background="#c0c0c0"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"/>
 
 </LinearLayout>

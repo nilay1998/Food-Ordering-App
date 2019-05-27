@@ -52,15 +52,23 @@ public class MainActivity extends AppCompatActivity {
         login_view=getLayoutInflater().inflate(R.layout.activity_main,null);
         register_view=getLayoutInflater().inflate(R.layout.register,null);
         setContentView(login_view);
+
         final Intent intent = new Intent(this, CustomerActivity.class);
         final Intent intent_admin =new Intent(this,AdminActivity.class);
+
         final Sessions session=new Sessions(getApplicationContext());
-        if(session.isLoggedIn())
+
+
+        if(session.isLoggedIn()==true && session.isAdmin()==false)
         {
             intent.putExtra("name",session.pref.getString("name","FUCK"));
             intent.putExtra("email",session.pref.getString("email","FUCK"));
             intent.putExtra("phone",session.pref.getLong("phone",00000));
             startActivity(intent);
+        }
+        else if(session.isLoggedIn()==true && session.isAdmin()==true)
+        {
+            startActivity(intent_admin);
         }
 
         final ProgressBar progressBar=(ProgressBar)findViewById(R.id.loading_spinner);
@@ -96,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         else if(response.body().getStatus().equals("1") && response.body().isAdmin()==true)
                         {
+                            session.adminLogin();
                             startActivity(intent_admin);
                         }
                     }

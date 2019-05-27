@@ -15,4 +15,12 @@
         android:layout_height="wrap_content"
         android:text="ADD ITEM"
         android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/adminLogout"
+        android:layout_marginTop="32dp"
+        android:layout_width="156dp"
+        android:layout_height="wrap_content"
+        android:text="Log out"
+        android:layout_gravity="center"/>
 </LinearLayout>

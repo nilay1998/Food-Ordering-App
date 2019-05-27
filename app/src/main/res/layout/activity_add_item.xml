@@ -18,7 +18,7 @@
             android:id="@+id/itemName"
             android:padding="8dp"
             android:layout_weight="2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Item"/>
 
@@ -27,7 +27,7 @@
             android:id="@+id/itemPrice"
             android:padding="8dp"
             android:layout_weight="2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Price"/>
 

@@ -14,12 +14,23 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
 
         final Intent intent=new Intent(this,AddItemActivity.class);
+        final Sessions session=new Sessions(getApplicationContext());
+        final Intent intent1 = new Intent(this, MainActivity.class);
 
         Button addItem=(Button)findViewById(R.id.addItem);
         addItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(intent);
+            }
+        });
+
+        Button adminLogout=findViewById(R.id.adminLogout);
+        adminLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                session.adminLogout();
+                startActivity(intent1);
             }
         });
     }
