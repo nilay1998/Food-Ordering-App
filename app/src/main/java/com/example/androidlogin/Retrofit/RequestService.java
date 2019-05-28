@@ -23,4 +23,12 @@ public interface RequestService
     @FormUrlEncoded
     Call<Profile> loginUser(@Field("email") String email,
                            @Field("password") String password);
+
+    @POST("menu")
+    @FormUrlEncoded
+    Call<MenuItem> addMenuItem(@Field("food") String food,
+                             @Field("price") String price);
+
+    @GET("menu")
+    Call<MenuItem> getMenuItem();
 }
